@@ -34,7 +34,7 @@ App = React.createClass({
         console.log(JSON.parse(xhr.responseText).data)
         var data = JSON.parse(xhr.responseText).data; // 4
         var gif = { // 5
-          url: data.fixed_height_downsampled_width,
+          url: data.fixed_width_downsampled_url,
           sourceUrl: data.url
         };
         callback(gif); // 6.
