@@ -1,12 +1,12 @@
-Search = React.createClass({
-
-  getInitialState() {
-    return {
-      searchingText: ''
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchingText: ""
     };
-  },
+  }
 
-  handleChange: function(event) {
+  handleChange = event => {
     var searchingText = event.target.value;
     this.setState({
       searchingText: searchingText
@@ -15,37 +15,40 @@ Search = React.createClass({
     if (searchingText.length > 2) {
       this.props.onSearch(searchingText);
     }
-  },
+  };
 
-  handleKeyUp: function(event) {
+  handleKeyUp = event => {
     if (event.keyCode === 13) {
       this.props.onSearch(this.state.searchingText);
     }
-  },
+  };
 
-  render: function() {
-
-    var styles = {
-      fontSize: '1.0em',
-      width: '90%',
-      maxWidth: '300px',
-      backgroundColor: 'blueviolet',
-      border: '.5px solid black',
-      outline: 'none',
-      margin: '20px',
-      color: 'white',
-      padding: '15px'
-    };
-
+  render() {
     return (
-      <input
-        type="text"
-        onChange={this.handleChange}
-        onKeyUp={this.handleKeyUp}
-        placeholder="Wpisz coś"
-        style={styles}
-        value={this.state.searchingText}
-      />
+      <div className="row">
+      <div className="input-field col l6 s12">
+        <input value={this.state.searchingText} id="gif" type="text" className="validate col s12" 
+         onChange={this.handleChange}
+         onKeyUp={this.handleKeyUp}
+        />
+       <label className="active" htmlFor="gif">Wpisz coś (minimum trzy znaki):</label>
+      </div>
+    </div>
+
+
     );
   }
-});
+
+
+
+
+  
+
+
+
+
+
+}
+
+
+

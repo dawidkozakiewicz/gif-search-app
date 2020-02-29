@@ -1,69 +1,69 @@
-App = React.createClass({
-
-  getInitialState() {
-    return {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       loading: false,
-      searchingText: '',
+      searchingText: "",
       gif: {}
     };
-  },
+  }
 
-  handleSearch: function(searchingText) { // 1.
+  handleSearch = searchingText => {
     this.setState({
-      loading: true // 2.
+      loading: true
     });
 
-    this.getGif(searchingText, function(gif) { // 3.
-      this.setState({ // 4
-        loading: false, // a
-        gif: gif, // b
-        searchingText: searchingText // c
+    this.getGif(searchingText, gif => {
+      this.setState({
+        loading: false,
+        gif: gif,
+        searchingText: searchingText
       });
-    }.bind(this)); 
-  },
+    });
+  };
 
-
-  getGif: function(searchingText, callback) { // 1
-    var GIPHY_PUB_KEY = 'Tj0Zkn8M11H60GBwCg70bAUZ0IDvheBi';
-    var GIPHY_API_URL = 'https://api.giphy.com';
-    var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText; // 2
-    var xhr = new XMLHttpRequest(); // 3
-    xhr.open('GET', url);
+  getGif = (searchingText, callback) => {
+    var GIPHY_PUB_KEY = "Tj0Zkn8M11H60GBwCg70bAUZ0IDvheBi";
+    var GIPHY_API_URL = "https://api.giphy.com";
+    var url =
+      GIPHY_API_URL +
+      "/v1/gifs/random?api_key=" +
+      GIPHY_PUB_KEY +
+      "&tag=" +
+      searchingText;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.send();
     xhr.onload = function() {
       if (xhr.status === 200) {
-        console.log(JSON.parse(xhr.responseText).data)
-        var data = JSON.parse(xhr.responseText).data; // 4
-        var gif = { // 5
-          url: data.fixed_width_downsampled_url,
+        var data = JSON.parse(xhr.responseText).data;
+        console.log(data);
+        var gif = {
+          // url: data.fixed_width_downsampled_url,
+          url: data.images.downsized_large.url,
           sourceUrl: data.url
         };
-        callback(gif); // 6.
+        callback(gif);
       }
     };
-    xhr.send();
-  },
+  };
 
-
-  render: function() {
-
-    var styles = {
-      margin: '0 auto',
-      textAlign: 'center',
-      borderRadius: "15px",
-      fontFamily: 'Muli',
-      border: '1px solid black',
-      backgroundColor: 'blueviolet'
-
-
-    };
-
+  render() {
     return (
-      <div style={styles}>
-          <h1>Wyszukiwarka GIFów!</h1>
-          <p>Znajdź GIFy na: <a href='http://giphy.com'>
-            giphy.com</a> <br/> Wciśnij enter aby załadować więcej.
-          </p>
-          <Search onSearch={this.handleSearch}/>
+      <div className="container z-depth-5">
+        <div className="row">
+          <div className="col l12">
+            <h1 className="teal-text">WYSZUKIWARKA GIFÓW</h1>
+            <p>
+              Znajdź GIFy na:
+              <a href="http://giphy.com"> giphy.com</a>
+              <br />
+              Wciśnij enter aby załadować więcej!
+            </p>
+          </div>
+        </div>
+
+        <Search onSearch={this.handleSearch} />
         <Gif
           loading={this.state.loading}
           url={this.state.gif.url}
@@ -72,4 +72,4 @@ App = React.createClass({
       </div>
     );
   }
-});
+}

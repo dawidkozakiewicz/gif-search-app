@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="./components/style.css">
+  <head>
+    <meta charset="UTF-8" />
 
-  <title>Kodilla-14.8</title>
+    <title>Kodilla-14.8</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+   <style>
+
+
+
+   </style>
   </head>
-<body>
-  <div id="app"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <body>
+    <div id="app"></div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script>
+    
+  $(document).ready(function() {
+    M.updateTextFields();
+  });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
+    <script>
+      var App, Gif, Search;
+    </script>
 
-  <script>
-    var App, Gif, Search
-  </script>
-
-  <script type="text/babel" src="components/App.js"></script>
-  <script type="text/babel" src="components/Gif.js"></script>
-  <script type="text/babel" src="components/Search.js"></script>
-  <script type="text/babel" src="script.js"></script>
-</body>
+    <script type="text/babel" src="components/App.js"></script>
+    <script type="text/babel" src="components/Gif.js"></script>
+    <script type="text/babel" src="components/Search.js"></script>
+    <script type="text/babel" src="script.js"></script>
+  </body>
 </html>
