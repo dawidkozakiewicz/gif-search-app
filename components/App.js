@@ -1,3 +1,7 @@
+const GIPHY_PUB_KEY = "Tj0Zkn8M11H60GBwCg70bAUZ0IDvheBi";
+const GIPHY_API_URL = "https://api.giphy.com";
+const url = `${GIPHY_API_URL}/v1/gifs/random?api_key=${GIPHY_PUB_KEY}&tag=${searchingText}`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -23,21 +27,8 @@ class App extends React.Component {
   };
 
   getGif = (searchingText, callback) => {
-    const GIPHY_PUB_KEY = "Tj0Zkn8M11H60GBwCg70bAUZ0IDvheBi";
-    const GIPHY_API_URL = "https://api.giphy.com";
-    const url = `${GIPHY_API_URL}/v1/gifs/random?api_key=${GIPHY_PUB_KEY}&tag=${searchingText}`;
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-    xhr.send();
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        const data = JSON.parse(xhr.responseText).data;
-        const gif = {
-          url: data.images.downsized_large.url,
-          sourceUrl: data.url
-        };
-        callback(gif);
-      }
+    return new Promise((resolve, reject) => {})
+
     };
   };
 
