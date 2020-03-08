@@ -1,7 +1,3 @@
-const GIPHY_PUB_KEY = "Tj0Zkn8M11H60GBwCg70bAUZ0IDvheBi";
-const GIPHY_API_URL = "https://api.giphy.com";
-const url = `${GIPHY_API_URL}/v1/gifs/random?api_key=${GIPHY_PUB_KEY}&tag=${searchingText}`;
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,19 +13,41 @@ class App extends React.Component {
       loading: true
     });
 
-    this.getGif(searchingText, gif => {
-      this.setState({
-        loading: false,
-        gif: gif,
-        searchingText: searchingText
+    this.getGif(searchingText)
+      .then(gif => {
+        this.setState({
+          loading: false,
+          gif: gif,
+          searchingText: searchingText
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
   };
 
-  getGif = (searchingText, callback) => {
-    return new Promise((resolve, reject) => {})
+  getGif = searchingText => {
+    return new Promise((resolve, reject) => {
+      const GIPHY_PUB_KEY = "Tj0Zkn8M11H60GBwCg70bAUZ0IDvheBi";
+      const GIPHY_API_URL = "https://api.giphy.com";
+      const url = `${GIPHY_API_URL}/v1/gifs/random?api_key=${GIPHY_PUB_KEY}&tag=${searchingText}`;
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url);
+      xhr.send();
 
-    };
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText).data;
+          const gif = {
+            url: data.images.downsized_large.url,
+            sourceUrl: data.url
+          };
+          resolve(gif);
+        } else {
+          reject("error");
+        }
+      };
+    });
   };
 
   render() {
@@ -47,7 +65,7 @@ class App extends React.Component {
           </div>
         </div>
 
-        <Search onSearch={this.handleSearch} />
+        <Search handleSearch={this.handleSearch} />
         <Gif
           loading={this.state.loading}
           url={this.state.gif.url}

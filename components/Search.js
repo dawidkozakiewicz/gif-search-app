@@ -13,13 +13,13 @@ class Search extends React.Component {
     });
 
     if (searchingText.length > 2) {
-      this.props.onSearch(searchingText);
+      this.props.handleSearch(searchingText);
     }
   };
 
   handleKeyUp = event => {
     if (event.keyCode === 13) {
-      this.props.onSearch(this.state.searchingText);
+      this.props.handleSearch(this.state.searchingText);
     }
   };
 
